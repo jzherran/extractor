@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -25,15 +26,12 @@ public interface FilePatternGenerator {
     final HttpClient instance =
         HttpClientBuilder.create().setConnectionTimeToLive(1, TimeUnit.MINUTES).build();
     final HttpResponse response = instance.execute(new HttpGet(url));
-    final BufferedReader in =
+    final BufferedReader br =
         new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 
-    String inputLine;
-    while ((inputLine = in.readLine()) != null) {
-      fullResponseBuilder.append(inputLine);
-    }
+    fullResponseBuilder.append(br.lines().collect(Collectors.joining()));
 
-    in.close();
+    br.close();
     return fullResponseBuilder
         .toString()
         .replaceAll("(?:\\r\\n|\\r|\\n)", StringUtils.SPACE)

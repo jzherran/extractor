@@ -1,16 +1,16 @@
 package com.challenge.extractor;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
-//@RunWith(SpringRunner.class)
-//@SpringBootTest
+/**
+ * Tests for {@link ExtractorApplication}.
+ *
+ * @author jzherran
+ * @version 0.0.1
+ * @since 2019-09-07
+ */
+// @RunWith(SpringRunner.class)
+// @SpringBootTest
 public class ExtractorApplicationTests {
 
-	@Test
-	public void contextLoads() {
-	}
-
+  // @Test
+  public void contextLoads() {}
 }

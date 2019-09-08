@@ -1,5 +1,17 @@
 package com.challenge.extractor.shell;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+/**
+ * Enumerate to manage the supported colors in this shell.
+ *
+ * @author jzherran
+ * @version 0.0.1
+ * @since 2019-09-07
+ */
+@Getter
+@AllArgsConstructor
 public enum PromptColor {
   BLACK(0),
   RED(1),
@@ -12,12 +24,4 @@ public enum PromptColor {
   BRIGHT(8);
 
   private final int value;
-
-  PromptColor(int value) {
-    this.value = value;
-  }
-
-  public int toJlineAttributedStyle() {
-    return this.value;
-  }
 }

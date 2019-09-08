@@ -15,21 +15,28 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.shell.jline.JLineShellAutoConfiguration;
 
+/**
+ * Configuration for spring shell bean.
+ *
+ * @author jzherran
+ * @version 0.0.1
+ * @since 2019-09-07
+ */
 @Configuration
 public class SpringShellConfig {
 
   @Bean
-  public ShellHelper shellHelper(@Lazy Terminal terminal) {
+  public ShellHelper shellHelper(final @Lazy Terminal terminal) {
     return new ShellHelper(terminal);
   }
 
   @Bean
   public InputReader inputReader(
-      @Lazy Terminal terminal,
-      @Lazy Parser parser,
-      JLineShellAutoConfiguration.CompleterAdapter completer,
-      @Lazy History history,
-      ShellHelper shellHelper) {
+      final @Lazy Terminal terminal,
+      final @Lazy Parser parser,
+      final JLineShellAutoConfiguration.CompleterAdapter completer,
+      final @Lazy History history,
+      final ShellHelper shellHelper) {
     LineReaderBuilder lineReaderBuilder =
         LineReaderBuilder.builder()
             .terminal(terminal)
@@ -38,9 +45,7 @@ public class SpringShellConfig {
             .highlighter(
                 (LineReader reader, String buffer) ->
                     new AttributedString(
-                        buffer,
-                        AttributedStyle.BOLD.foreground(
-                            PromptColor.WHITE.toJlineAttributedStyle())))
+                        buffer, AttributedStyle.BOLD.foreground(PromptColor.WHITE.getValue())))
             .parser(parser);
 
     LineReader lineReader = lineReaderBuilder.build();

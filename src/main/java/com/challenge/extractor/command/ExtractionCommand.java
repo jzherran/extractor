@@ -10,6 +10,8 @@ import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
 /**
+ * Start command to show implementation of command component.
+ *
  * @author jzherran
  * @version 0.0.1
  * @since 2019-09-07

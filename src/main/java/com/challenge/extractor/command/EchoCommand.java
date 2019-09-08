@@ -7,6 +7,8 @@ import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
 /**
+ * Command for show implementation of message in this shell.
+ *
  * @author jzherran
  * @version 0.0.1
  * @since 2019-09-07
@@ -18,7 +20,7 @@ public class EchoCommand {
   private ShellHelper shellHelper;
 
   @ShellMethod("Displays greeting message to the user whose name is supplied")
-  public String echo(@ShellOption({"-N", "--name"}) String name) {
+  public String echo(@ShellOption({"-N", "--name"}) final String name) {
     String message = String.format("Hello %s!", name);
     shellHelper.print(message.concat(" (Default style message)"));
     shellHelper.printError(message.concat(" (Error style message)"));

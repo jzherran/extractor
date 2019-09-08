@@ -19,109 +19,71 @@ import org.springframework.beans.factory.annotation.Value;
 public class ShellHelper {
 
   @Value("${shell.out.info}")
-  public String infoColor;
+  private String infoColor;
 
   @Value("${shell.out.success}")
-  public String successColor;
+  private String successColor;
 
   @Value("${shell.out.warning}")
-  public String warningColor;
+  private String warningColor;
 
   @Value("${shell.out.error}")
-  public String errorColor;
+  private String errorColor;
 
   private Terminal terminal;
 
-  public ShellHelper(Terminal terminal) {
+  public ShellHelper(final Terminal terminal) {
     this.terminal = terminal;
   }
 
-  /**
-   * Construct colored message in the given color.
-   *
-   * @param message message to return
-   * @param color color to print
-   * @return colored message
-   */
-  private String getColored(String message, PromptColor color) {
+  private String getColored(final String message, final PromptColor color) {
     return (new AttributedStringBuilder())
-        .append(message, AttributedStyle.DEFAULT.foreground(color.toJlineAttributedStyle()))
+        .append(message, AttributedStyle.DEFAULT.foreground(color.getValue()))
         .toAnsi();
   }
 
-  /**
-   * Generic Print to the console method.
-   *
-   * @param message message to print
-   * @param color (optional) prompt color
-   */
-  private void print(String message, PromptColor color) {
-    String toPrint = message;
+  private void print(final String message, final PromptColor color) {
     if (color != null) {
-      toPrint = getColored(message, color);
+      terminal.writer().println(getColored(message, color));
+    } else {
+      terminal.writer().println(message);
     }
-    terminal.writer().println(toPrint);
     terminal.flush();
   }
 
-  public String getErrorMessage(String message) {
+  public String getErrorMessage(final String message) {
     return getColored(message, PromptColor.valueOf(errorColor));
   }
 
-  public String getInfoMessage(String message) {
+  public String getInfoMessage(final String message) {
     return getColored(message, PromptColor.valueOf(infoColor));
   }
 
-  public String getSuccessMessage(String message) {
+  public String getSuccessMessage(final String message) {
     return getColored(message, PromptColor.valueOf(successColor));
   }
 
-  public String getWarningMessage(String message) {
+  public String getWarningMessage(final String message) {
     return getColored(message, PromptColor.valueOf(warningColor));
   }
 
-  /**
-   * Print message to the console in the default color.
-   *
-   * @param message message to print
-   */
-  public void print(String message) {
+  public void print(final String message) {
     print(message, null);
   }
 
-  /**
-   * Print message to the console in the success color.
-   *
-   * @param message message to print
-   */
-  public void printSuccess(String message) {
+  public void printSuccess(final String message) {
     print(message, PromptColor.valueOf(successColor));
   }
 
-  /**
-   * Print message to the console in the info color.
-   *
-   * @param message message to print
-   */
-  public void printInfo(String message) {
+  public void printInfo(final String message) {
     print(message, PromptColor.valueOf(infoColor));
   }
 
-  /**
-   * Print message to the console in the warning color.
-   *
-   * @param message message to print
-   */
-  public void printWarning(String message) {
+  public void printWarning(final String message) {
     print(message, PromptColor.valueOf(warningColor));
   }
 
-  /**
-   * Print message to the console in the error color.
-   *
-   * @param message message to print
-   */
-  public void printError(String message) {
+  public void printError(final String message) {
     print(message, PromptColor.valueOf(errorColor));
   }
 }

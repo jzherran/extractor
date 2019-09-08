@@ -5,10 +5,10 @@ import com.challenge.extractor.service.generator.HashTagGenerator;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.SystemUtils;
@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class ExtractionService {
 
-  // Regex to validate a valid URL site.
+  // Regex to validate a valid URL url.
   private static final String URL_REGEX =
       "^(http://|https://)?(www.)?([a-zA-Z0-9-]+)(.[a-z]{2,3})+(/)?.*$";
 
@@ -35,7 +35,7 @@ public class ExtractionService {
 
   public Pair<String, int[]> basicExtraction(final String fileLocation)
       throws IOException, ExecutionException, InterruptedException {
-    // All sites to parser and analyse in terms of pattern matcher.
+    // All urls to parser and analyse in terms of pattern matcher.
     final List<String> urls = getListFromFile(fileLocation);
 
     // Component to parallel all calls and processing of HTML bodies.
@@ -50,7 +50,7 @@ public class ExtractionService {
     // Result composed for output path and total of sites analyzed.
     final Pair<String, int[]> result = MutablePair.of(outputPath, new int[2]);
 
-    for (String url : urls) {
+    for (final String url : urls) {
       if (url.matches(URL_REGEX)) {
         processParallelManager.addJob(url, () -> hashTagGenerator.generate(url, outputPath));
       } else {
@@ -67,16 +67,13 @@ public class ExtractionService {
   }
 
   private List<String> getListFromFile(final String path) throws IOException {
-    final List<String> list = new ArrayList<>();
+    final List<String> list;
 
     try (FileReader fr = new FileReader(path);
         BufferedReader br = new BufferedReader(fr)) {
 
       // Read line by line.
-      String line;
-      while ((line = br.readLine()) != null) {
-        list.add(line);
-      }
+      list = br.lines().collect(Collectors.toList());
     }
 
     return list;

@@ -2,6 +2,12 @@ plugins {
     id 'org.springframework.boot' version '2.1.8.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
     id 'java'
+
+    // Code quality
+    id 'findbugs'
+    id 'pmd'
+    id 'jacoco'
+    id 'checkstyle'
 }
 
 group = 'com.challenge'
@@ -28,4 +34,18 @@ dependencies {
     compile 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+pmd {
+    ignoreFailures = true
+}
+
+checkstyle {
+    configFile = "${rootProject.projectDir}/config/checkstyle.xml" as File
+    configProperties = [configDir: "${rootProject.projectDir}/config"]
+}
+
+findbugs {
+    sourceSets = [sourceSets.main]
+    excludeFilter = "${rootProject.projectDir}/config/findbugs-excludes.xml" as File
 }

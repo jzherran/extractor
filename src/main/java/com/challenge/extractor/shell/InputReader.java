@@ -6,72 +6,33 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.jline.reader.LineReader;
 
 /**
+ * Component to manage interaction between user and shell.
+ *
  * @author jzherran
  * @version 0.0.1
  * @since 2019-09-07
  */
+@AllArgsConstructor
 public class InputReader {
 
-  private static final Character DEFAULT_MASK = '*';
-
-  private Character mask;
-
   private LineReader lineReader;
-
   private ShellHelper shellHelper;
 
-  public InputReader(LineReader lineReader, ShellHelper shellHelper) {
-    this(lineReader, shellHelper, null);
-  }
-
-  public InputReader(LineReader lineReader, ShellHelper shellHelper, Character mask) {
-    this.lineReader = lineReader;
-    this.shellHelper = shellHelper;
-    this.mask = mask != null ? mask : DEFAULT_MASK;
-  }
-
-  public String prompt(String prompt) {
-    return prompt(prompt, null, true);
-  }
-
-  public String prompt(String prompt, String defaultValue) {
-    return prompt(prompt, defaultValue, true);
-  }
-
-  /**
-   * Prompts user for input.
-   *
-   * @param prompt
-   * @param defaultValue
-   * @param echo
-   * @return
-   */
-  public String prompt(String prompt, String defaultValue, boolean echo) {
+  public String prompt(final String prompt) {
     String answer = "";
 
-    if (echo) {
-      answer = lineReader.readLine(prompt + ": ");
-    } else {
-      answer = lineReader.readLine(prompt + ": ", mask);
-    }
-    if (StringUtils.isEmpty(answer)) {
-      return defaultValue;
-    }
+    answer = lineReader.readLine(prompt + ": ");
+
     return answer;
   }
 
-  /**
-   * Loops until one of the `options` is provided. Pressing return is equivalent to returning
-   * `defaultValue`. <br>
-   * Passing null for defaultValue signifies that there is no default value.<br>
-   * Passing "" or null among optionsAsList means that empty answer is allowed, in these cases this
-   * method returns empty String "" as the result of its execution.
-   */
-  public String promptWithOptions(String prompt, String defaultValue, List<String> optionsAsList) {
+  public String promptWithOptions(
+      final String prompt, final String defaultValue, final List<String> optionsAsList) {
     String answer;
     List<String> allowedAnswers = new ArrayList<>(optionsAsList);
     if (!StringUtils.isAllBlank(defaultValue)) {
@@ -89,7 +50,7 @@ public class InputReader {
     return answer;
   }
 
-  private List<String> formatOptions(String defaultValue, List<String> optionsAsList) {
+  private List<String> formatOptions(final String defaultValue, final List<String> optionsAsList) {
     List<String> result = new ArrayList<>();
     for (String option : optionsAsList) {
       String val = option;
@@ -105,16 +66,12 @@ public class InputReader {
     return result;
   }
 
-  /**
-   * Loops until one value from the list of options is selected, printing each option on its own
-   * line.
-   */
   public String selectFromList(
-      String headingMessage,
-      String promptMessage,
-      Map<String, String> options,
-      boolean ignoreCase,
-      String defaultValue) {
+      final String headingMessage,
+      final String promptMessage,
+      final Map<String, String> options,
+      final boolean ignoreCase,
+      final String defaultValue) {
     String answer;
     Set<String> allowedAnswers = new HashSet<>(options.keySet());
 
@@ -147,12 +104,14 @@ public class InputReader {
     return answer;
   }
 
-  private boolean containsString(Set<String> l, String s, boolean ignoreCase) {
+  private boolean containsString(final Set<String> l, final String s, final boolean ignoreCase) {
     if (!ignoreCase) {
       return l.contains(s);
     }
     for (final String value : l) {
-      if (value.equalsIgnoreCase(s)) return true;
+      if (value.equalsIgnoreCase(s)) {
+        return true;
+      }
     }
     return false;
   }
