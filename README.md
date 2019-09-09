@@ -21,12 +21,11 @@ java -jar build/libs/extractor-0.0.1-SNAPSHOT.jar
 
 After that you can see the spring shell developed for this challenge.
 
-This shell support different commands but at the beginning you can use 
-the command `help` to see what are the command supported.
+This shell supports different commands. At the beginning you can use the command 
+`help` to see what are the supported commands
 
-For the first use, you need to create a file with the input of the list of sites 
-to apply the data extraction, this file can be created in wherever location in your 
-computer.
+For the first use, you need to create a file with the input of the sites 
+list to apply the data extraction, this file can be created in any location in your computer.
 
 An example of the file you need is this:
 ```vi
@@ -36,10 +35,11 @@ https://getdaytrends.com/
 https://www.trendinalia.com/twitter-trending-topics/globales/globales-190907.html
 ```
 
-When you call the `extract` command for a specific file take in account, if you use 
-Windows you need to use this way **C:\\Users\\userName\\desktop\\list.txt**, but 
-if you use a Linux or OSX system you need to use this other way 
-**/home/userName/desktop/list.txt**.
+When you call the `extract` command for a specific file take into account: 
+* If your OS is Windows you need to use it in this way: 
+**C:\\Users\\userName\\desktop\\list.txt**
+* If your OS is Linux or OSX you need to use it in this way: 
+**/home/userName/desktop/list.txt**
 
 In the next code block you can see an example of a correct execution and a possible 
 result in debug mode for logger.
