@@ -1,8 +1,8 @@
 # extractor challenge
 Extract pattern matches from main page of sites
 
-This is a Spring Shell project, the only requirement to use this project 
-is have installed Java 1.8+.
+This is a Spring Shell project, the only requirement to use this project is 
+having installed Java 1.8+.
 
 The definition of the dependencies for this project you can be found in 
 build.gradle the use of Lombok in IDE must be enabled if you want to use in this tool.
