@@ -26,14 +26,18 @@ repositories {
 
 dependencies {
     implementation(
-            'org.springframework.boot:spring-boot-starter',
             'org.springframework.shell:spring-shell-starter:2.0.0.RELEASE',
             'org.apache.commons:commons-lang3',
             'org.apache.httpcomponents:httpclient'
     )
     compile 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation (
+            'org.mockito:mockito-core:2.8.47',
+            'org.powermock:powermock-api-mockito2:1.7.4',
+            'org.powermock:powermock-module-junit4:1.7.4'
+    )
+    testAnnotationProcessor 'org.projectlombok:lombok'
 }
 
 pmd {

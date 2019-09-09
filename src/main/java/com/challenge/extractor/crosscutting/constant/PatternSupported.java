@@ -1,4 +1,4 @@
-package com.challenge.extractor.cosscutting.constant;
+package com.challenge.extractor.crosscutting.constant;
 
 /**
  * Enumerate for supported patterns.
@@ -8,7 +8,7 @@ package com.challenge.extractor.cosscutting.constant;
  * @since 2019-09-07
  */
 public enum PatternSupported {
-  HAST_TAG,
+  HASH_TAG,
   MENTION,
   PROPER_NAME
 }

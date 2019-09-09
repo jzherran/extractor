@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class ExtractionService {
 
-  // Regex to validate a valid URL url.
+  // Regex to validate a URL.
   private static final String URL_REGEX =
       "^(http://|https://)?(www.)?([a-zA-Z0-9-]+)(.[a-z]{2,3})+(/)?.*$";
 

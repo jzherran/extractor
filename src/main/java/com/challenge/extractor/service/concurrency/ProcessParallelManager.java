@@ -1,7 +1,7 @@
 package com.challenge.extractor.service.concurrency;
 
-import com.challenge.extractor.cosscutting.concurrency.ExceptionAwareSupplier;
-import com.challenge.extractor.cosscutting.concurrency.Job;
+import com.challenge.extractor.crosscutting.concurrency.ExceptionAwareSupplier;
+import com.challenge.extractor.crosscutting.concurrency.Job;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;

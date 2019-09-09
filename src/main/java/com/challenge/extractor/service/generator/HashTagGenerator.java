@@ -1,6 +1,6 @@
 package com.challenge.extractor.service.generator;
 
-import com.challenge.extractor.cosscutting.constant.PatternSupported;
+import com.challenge.extractor.crosscutting.constant.PatternSupported;
 import java.io.PrintWriter;
 import java.util.Set;
 import java.util.TreeSet;
@@ -25,7 +25,7 @@ public class HashTagGenerator implements FilePatternGenerator {
 
   @Override
   public boolean match(final PatternSupported pattern) {
-    return PatternSupported.HAST_TAG.equals(pattern);
+    return PatternSupported.HASH_TAG.equals(pattern);
   }
 
   @Override

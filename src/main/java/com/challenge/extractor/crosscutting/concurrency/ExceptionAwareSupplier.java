@@ -1,4 +1,4 @@
-package com.challenge.extractor.cosscutting.concurrency;
+package com.challenge.extractor.crosscutting.concurrency;
 
 import java.util.function.Supplier;
 

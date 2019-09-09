@@ -1,6 +1,6 @@
 package com.challenge.extractor.service.generator;
 
-import com.challenge.extractor.cosscutting.constant.PatternSupported;
+import com.challenge.extractor.crosscutting.constant.PatternSupported;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
