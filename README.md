@@ -37,7 +37,7 @@ https://www.trendinalia.com/twitter-trending-topics/globales/globales-190907.htm
 
 When you call the `extract` command for a specific file take into account: 
 * If your OS is Windows you need to use it in this way: 
-**C:\\Users\\userName\\desktop\\list.txt**
+**C:\\\\Users\\\\userName\\\\desktop\\\\list.txt**
 * If your OS is Linux or OSX you need to use it in this way: 
 **/home/userName/desktop/list.txt**
 
