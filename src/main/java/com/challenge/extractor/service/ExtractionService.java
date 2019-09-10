@@ -1,10 +1,12 @@
 package com.challenge.extractor.service;
 
+import com.challenge.extractor.crosscutting.constant.PatternSupported;
 import com.challenge.extractor.service.concurrency.ProcessParallelManager;
-import com.challenge.extractor.service.generator.HashTagGenerator;
+import com.challenge.extractor.service.generator.FileGenerator;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -31,7 +33,7 @@ public class ExtractionService {
       "^(http://|https://)?(www.)?([a-zA-Z0-9-]+)(.[a-z]{2,3})+(/)?.*$";
 
   private ExecutorService executorService;
-  private HashTagGenerator hashTagGenerator;
+  private FileGenerator fileGenerator;
 
   public Pair<String, int[]> basicExtraction(final String fileLocation)
       throws IOException, ExecutionException, InterruptedException {
@@ -52,7 +54,11 @@ public class ExtractionService {
 
     for (final String url : urls) {
       if (url.matches(URL_REGEX)) {
-        processParallelManager.addJob(url, () -> hashTagGenerator.generate(url, outputPath));
+        processParallelManager.addJob(
+            url,
+            () ->
+                fileGenerator.generate(
+                    url, outputPath, Collections.singletonList(PatternSupported.HASH_TAG)));
       } else {
         log.warn("{} not is a valid URL", url);
         result.getRight()[1]++;

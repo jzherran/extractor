@@ -1,6 +1,5 @@
 package com.challenge.extractor.command;
 
-import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -15,6 +14,6 @@ public class ExtractionCommandTest {
 
   @Test
   public final void test() {
-    assertTrue(true);
+    // TODO complete tests
   }
 }

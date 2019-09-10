@@ -4,12 +4,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import com.challenge.extractor.crosscutting.concurrency.ExceptionAwareSupplier;
 import com.challenge.extractor.service.concurrency.ProcessParallelManager;
-import com.challenge.extractor.service.generator.HashTagGenerator;
+import com.challenge.extractor.service.generator.FileGenerator;
 import com.challenge.extractor.utility.LogCaptorUtil;
 import java.util.concurrent.ExecutorService;
 import org.apache.commons.lang3.SystemUtils;
@@ -40,7 +41,7 @@ public class ExtractionServiceTest {
 
   @Mock private ProcessParallelManager processParallelManager;
   @Mock private ExecutorService executorService;
-  @Mock private HashTagGenerator hashTagGenerator;
+  @Mock private FileGenerator fileGenerator;
   @InjectMocks private ExtractionService extractionService;
 
   private LogCaptorUtil captor = new LogCaptorUtil();
@@ -68,7 +69,7 @@ public class ExtractionServiceTest {
           .when(processParallelManager)
           .addJob(anyString(), any(ExceptionAwareSupplier.class));
       Mockito.when(processParallelManager.process()).thenReturn(new int[] {29, 0});
-      Mockito.when(hashTagGenerator.generate(anyString(), anyString())).thenReturn(true);
+      Mockito.when(fileGenerator.generate(anyString(), anyString(), anyList())).thenReturn(true);
 
       final Pair<String, int[]> result = extractionService.basicExtraction(FILE_OK);
 
@@ -98,7 +99,7 @@ public class ExtractionServiceTest {
           .when(processParallelManager)
           .addJob(anyString(), any(ExceptionAwareSupplier.class));
       Mockito.when(processParallelManager.process()).thenReturn(new int[] {28, 0});
-      Mockito.when(hashTagGenerator.generate(anyString(), anyString())).thenReturn(true);
+      Mockito.when(fileGenerator.generate(anyString(), anyString(), anyList())).thenReturn(true);
 
       final Pair<String, int[]> result = extractionService.basicExtraction(FILE_FAIL);
 
